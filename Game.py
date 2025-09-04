@@ -72,7 +72,8 @@ pygame.display.set_caption('Pong')  # Set window title
 
 # Colors
 bg_color = pygame.Color('grey12')
-
+if
+    print(hhah)
 # Game Rectangles (ball and player paddle)
 ball = pygame.Rect(screen_width / 2 - 15, screen_height / 2 - 15, 30, 30)  # Ball (centered)
 # TODO Task 1 Make the paddle bigger
