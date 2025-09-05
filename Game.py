@@ -18,12 +18,17 @@ def ball_movement():
         ball_speed_y = speed * random.choice((1, -1))  # Randomize initial vertical direction
         start = False
 
-    # Ball collision with the player paddle
+    # Ball collision with the player paddle y cambio de color aleatorio
     if ball.colliderect(player):
         if abs(ball.bottom - player.top) < 10:  # Check if ball hits the top of the paddle
             # TODO Task 2: Fix score to increase by 1
-            score = 1  # Increase player score
-            ball_speed_y *= -1  # Reverse ball's vertical direction
+            score = score +1  # Increase player score
+            ball_speed_y *= -velocidad_aumento # Reverse ball's vertical direction
+            ball_speed_x *= velocidad_aumento
+            limit_speed()
+
+
+
             # TODO Task 6: Add sound effects HERE
 
     # Ball collision with top boundary
@@ -59,6 +64,16 @@ def restart():
     ball_speed_y, ball_speed_x = 0, 0  # Stop ball movement
     score = 0  # Reset player score
 
+def limit_speed():  # capasidad de velocidad
+    global ball_speed_x, ball_speed_y
+    max_speed = 25
+    if abs(ball_speed_x) > max_speed:
+        ball_speed_x = max_speed * (1 if ball_speed_x > 0 else -1)
+    if abs(ball_speed_y) > max_speed:
+        ball_speed_y = max_speed * (1 if ball_speed_y > 0 else -1)
+
+
+
 # General setup
 pygame.mixer.pre_init(44100, -16, 1, 1024)
 pygame.init()
@@ -72,20 +87,22 @@ pygame.display.set_caption('Pong')  # Set window title
 
 # Colors
 bg_color = pygame.Color('grey12')
-if
-    print(hhah)
+
+
+
+
 # Game Rectangles (ball and player paddle)
 ball = pygame.Rect(screen_width / 2 - 15, screen_height / 2 - 15, 30, 30)  # Ball (centered)
 # TODO Task 1 Make the paddle bigger
 player_height = 15
-player_width = 100
+player_width = 200
 player = pygame.Rect(screen_width/2 - 45, screen_height - 20, player_width, player_height)  # Player paddle
 
 # Game Variables s
 ball_speed_x = 0
 ball_speed_y = 0
 player_speed = 0
-
+velocidad_aumento= 1.1
 # Score Text setup
 score = 0
 basic_font = pygame.font.Font('freesansbold.ttf', 32)  # Font for displaying score
@@ -119,12 +136,15 @@ while True:
     player_movement()
 
     # Visuals
+    colores = ["Red", "Blue", "Yellow", "Green"]
+    ball_color = pygame.Color(random.choice(colores))
+
     light_grey = pygame.Color('grey83')
     red = pygame.Color('red')
     screen.fill(bg_color)  # Clear screen with background color
     pygame.draw.rect(screen, light_grey, player)  # Draw player paddle
     # TODO Task 3: Change the Ball Color
-    pygame.draw.ellipse(screen, light_grey, ball)  # Draw ball
+    pygame.draw.ellipse(screen, ball_color , ball)  # Draw ball
     player_text = basic_font.render(f'{score}', False, light_grey)  # Render player score
     screen.blit(player_text, (screen_width/2 - 15, 10))  # Display score on screen
 
