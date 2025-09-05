@@ -151,3 +151,6 @@ while True:
     # Update display
     pygame.display.flip()
     clock.tick(60)  # Maintain 60 frames per second
+
+
+if score_ijflk l
