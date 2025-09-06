@@ -18,13 +18,15 @@ def ball_movement():
         ball_speed_y = speed * random.choice((1, -1))  # Randomize initial vertical direction
         start = False
 
-    # Ball collision with the player paddle y cambio de color aleatorio
+    # Ball collision with the player paddle, cambio de color aleatorio y reproduce sonido al chocar con el paddle.
     if ball.colliderect(player):
         if abs(ball.bottom - player.top) < 10:  # Check if ball hits the top of the paddle
             # TODO Task 2: Fix score to increase by 1
             score = score +1  # Increase player score
             ball_speed_y *= -velocidad_aumento # Reverse ball's vertical direction
             ball_speed_x *= velocidad_aumento
+            Ball_touch_paddle_sfx = pygame.mixer.Sound("Bop_sound.wav")
+            Ball_touch_paddle_sfx.play()
             limit_speed()
 
 
@@ -39,8 +41,9 @@ def ball_movement():
     if ball.left <= 0 or ball.right >= screen_width:
         ball_speed_x *= -1
 
-    # Ball goes below the bottom boundary (missed by player)
+    # Ball goes below the bottom boundary (missed by player) y La musica se detiene si al jugador se le escapa la bola.
     if ball.bottom > screen_height:
+        pygame.mixer.music.stop()
         restart()  # Reset the game
 
 def player_movement():
@@ -113,7 +116,7 @@ start = False  # Indicates if the game has started
 while True:
     # Event handling
     # TODO Task 4: Add your name
-    name = "John Doe"
+    name = "Jose Felix"
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # Quit the game
             pygame.quit()
@@ -130,6 +133,14 @@ while True:
                 player_speed += 6  # Stop moving left
             if event.key == pygame.K_RIGHT:
                 player_speed -= 6  # Stop moving right
+
+    # La musica se reproduce si el start == True
+    if start == True:
+        if not pygame.mixer_music.get_busy():
+            pygame.mixer.music.load("Megalovania.wav")
+            pygame.mixer.music.play()
+
+
 
     # Game Logic
     ball_movement()
