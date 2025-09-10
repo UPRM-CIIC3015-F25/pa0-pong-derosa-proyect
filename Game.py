@@ -97,7 +97,7 @@ def ball_movement():
             limit_speed()
 
             # ✅ Verificar si se alcanza el puntaje para cambiar de juego
-            if score >= 10 :
+            if score >= 15 :
                 ejecutar_otro_codigo()
 
     if ball.top <= 0:
