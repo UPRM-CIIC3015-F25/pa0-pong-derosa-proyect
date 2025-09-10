@@ -183,3 +183,9 @@ while True:
 
         pygame.display.update()
         reloj.tick(60)
+
+    if estado_juego == "inicio":
+        pygame.mixer.music.load("Thundersnail.wav")
+        pygame.mixer.music.play()
+    elif estado_juego == "fin":
+        pygame.mixer.music.stop()
