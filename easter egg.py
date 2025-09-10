@@ -26,14 +26,15 @@ piso = pygame.Surface((1500, 200))
 piso.fill((139, 69, 19))
 fondo=pygame.image.load("fotos/game_background_2.png")
 # Meta
-meta_rect = pygame.Rect(1400, piso_altura - 400, 50, 100)
+meta_rect = pygame.Rect(1300, piso_altura - 200, 50, 100)
 meta_img = pygame.Surface((50, 100))
 meta_img.fill((255, 255, 0))
 meta= pygame.image.load("fotos/gafufo.png")
+meta = pygame.transform.scale(meta,(200,200))
 
 # Jugador
 jugador_rect = personaje_img.get_rect(midbottom=(100, piso_altura))
-jugador_hitbox = jugador_rect.inflate(-30, -40)  # hitbox proporcional al sprite reducido
+jugador_hitbox = jugador_rect.inflate(-500, -600)  # hitbox proporcional al sprite reducido
 
 vel_y = 0
 gravedad = 1
