@@ -42,7 +42,7 @@ basic_font = pygame.font.Font('freesansbold.ttf', 32)
 
 
 # --- Variables de juego ---
-ball_size = 20
+ball_size = 30
 player_width = 250
 player_height = 20
 ball = pygame.Rect(screen_width / 2 - ball_size/2, screen_height / 2 - ball_size/2, ball_size, ball_size)
@@ -51,6 +51,7 @@ player = pygame.Rect(screen_width/2 - player_width/2, screen_height - 30, player
 ball_speed_x = 0
 ball_speed_y = 0
 player_speed = 0
+
 score = 0
 velocidad_aumento = 1.1
 
@@ -85,7 +86,7 @@ def ball_movement():
 
     if ball.colliderect(player):
         if abs(ball.bottom - player.top) < 10:
-            score += 5
+            score += 1
             ball_speed_y *= -velocidad_aumento
             ball_speed_x *= velocidad_aumento
             try:
@@ -96,7 +97,7 @@ def ball_movement():
             limit_speed()
 
             # ✅ Verificar si se alcanza el puntaje para cambiar de juego
-            if score >= 15:
+            if score >= 10 :
                 ejecutar_otro_codigo()
 
     if ball.top <= 0:
@@ -141,16 +142,16 @@ while True:
                     start = True
             else:
                 if event.key == pygame.K_LEFT:
-                    player_speed -= 6
+                    player_speed -= 10
                 if event.key == pygame.K_RIGHT:
-                    player_speed += 6
+                    player_speed += 10
                 if event.key == pygame.K_SPACE:
                     start = True
         if event.type == pygame.KEYUP and not menu_inicio:
             if event.key == pygame.K_LEFT:
-                player_speed += 6
+                player_speed += 10
             if event.key == pygame.K_RIGHT:
-                player_speed -= 6
+                player_speed -= 10
 
     if menu_inicio:
         mostrar_pantalla_inicio()

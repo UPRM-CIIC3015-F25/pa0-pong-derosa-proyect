@@ -131,9 +131,9 @@ while True:
         jugador_rect.clamp_ip(pantalla.get_rect())
         jugador_hitbox.clamp_ip(pantalla.get_rect())
 
-        # Invulnerabilidad inicial
+        # Inmortal
         tiempo_actual = pygame.time.get_ticks()
-        invulnerable = tiempo_actual - tiempo_inicio < 2000
+        invulnerable = tiempo_actual - tiempo_inicio < 1000
 
         # Mover enemigos y actualizar hitboxes
         enemigos_actualizados = []
@@ -172,10 +172,10 @@ while True:
 
         for enemigo in enemigos:
             pantalla.blit(enemigo_img, enemigo["rect"])
-            pygame.draw.rect(pantalla, (255, 0, 0), enemigo["hitbox"], 2)  # Hitbox roja
+
 
         pantalla.blit(personaje_img, jugador_rect)
-        pygame.draw.rect(pantalla, (0, 255, 0), jugador_hitbox, 2)  # Hitbox verde
+
 
         puntaje_surf = font.render(f"Puntaje: {puntaje}", True, (255, 255, 255))
         pantalla.blit(puntaje_surf, (20, 20))
