@@ -26,9 +26,10 @@ piso = pygame.Surface((1500, 200))
 piso.fill((139, 69, 19))
 fondo=pygame.image.load("fotos/game_background_2.png")
 # Meta
-meta_rect = pygame.Rect(1400, piso_altura - 100, 50, 100)
+meta_rect = pygame.Rect(1400, piso_altura - 400, 50, 100)
 meta_img = pygame.Surface((50, 100))
 meta_img.fill((255, 255, 0))
+meta= pygame.image.load("fotos/gafufo.png")
 
 # Jugador
 jugador_rect = personaje_img.get_rect(midbottom=(100, piso_altura))
@@ -168,7 +169,7 @@ while True:
         # Dibujar todo
         pantalla.blit(fondo, (0, 0))
         pantalla.blit(piso, (0, piso_altura - 50))
-        pantalla.blit(meta_img, meta_rect)
+        pantalla.blit(meta, meta_rect)
 
         for enemigo in enemigos:
             pantalla.blit(enemigo_img, enemigo["rect"])
